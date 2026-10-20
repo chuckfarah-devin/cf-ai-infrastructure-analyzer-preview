@@ -5,6 +5,6 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   // Base path for GitHub Pages deployment:
-  // https://chuckfarah-devin.github.io/cf-ai-infrastructure-analyzer/
-  base: '/cf-ai-infrastructure-analyzer/',
+  // https://chuckfarah-devin.github.io/cf-ai-infrastructure-analyzer-preview/
+  base: '/cf-ai-infrastructure-analyzer-preview/',
 })
