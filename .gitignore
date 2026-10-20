@@ -1,0 +1,7 @@
+node_modules
+dist
+screenshots/
+scripts/*.json
+.env
+.env.local
+.env.*.local
