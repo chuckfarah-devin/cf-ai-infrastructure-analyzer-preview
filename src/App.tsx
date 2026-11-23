@@ -13,7 +13,7 @@ import { FeaturedCharts } from './components/FeaturedCharts'
 import { FinancialDashboard } from './components/FinancialDashboard'
 import { AssumptionsPanel } from './components/AssumptionsPanel'
 import { SiteExplorer } from './components/SiteExplorer'
-import { Menu, X, ChevronDown, ChevronRight, Zap, MapPin, MessageSquare } from 'lucide-react'
+import { Menu, X, ChevronDown, ChevronRight, Zap, MapPin } from 'lucide-react'
 import './index.css'
 
 type AppTab = 'energy-flow' | 'site-explorer';
@@ -43,18 +43,9 @@ function App() {
 
   const handleConfigChange = (newConfig: ScenarioConfig) => {
     setConfig(newConfig)
-    const newResult = simulateScenario(newConfig)
-    setResult(newResult)
-    // Reset to peak hour of new scenario
-    let peakHour = 0
-    let peakDemand = 0
-    newResult.hours.forEach((h, i) => {
-      if (h.totalDemandMW > peakDemand) {
-        peakDemand = h.totalDemandMW
-        peakHour = i
-      }
-    })
-    setSelectedHour(peakHour)
+    setResult(simulateScenario(newConfig))
+    // Preserve selectedHour: strategy/config changes are separate from time
+    // selection, and the hour index (0–23) stays valid for every scenario.
   }
 
   // Traditional-mode hours for financial comparison
@@ -111,15 +102,7 @@ function App() {
           >
             {showAssumptions ? 'Hide Assumptions' : 'Assumptions'}
           </button>
-          <a
-            className="header-btn header-btn-link"
-            href="https://github.com/chuckfarah-devin/cf-ai-infrastructure-analyzer/issues/new"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MessageSquare size={14} />
-            <span>Feedback</span>
-          </a>
+
         </div>
       </header>
 
